@@ -9,13 +9,55 @@ Built with AI assistance — see [How this was built](#how-this-was-built).
 
 ![justfeed: the configured feeds on the left, the articles of the opened feed on the right](assets/screenshot.png)
 
-## Quick start
+## Installing
 
-Install from a clone of this repository:
+Every release carries a prebuilt Linux archive (x86_64, glibc 2.35 or newer — built on Ubuntu 22.04)
+and this installer, which fetches it, checks it against the sha256 it carries and puts `justfeed`
+in `~/.local/bin`:
 
+```sh
+curl --proto '=https' --tlsv1.2 -LsSf \
+  https://github.com/riesemann/justfeed/releases/latest/download/justfeed-installer.sh | sh
 ```
+
+From a clone you get the same result built from the checkout instead — the installer tells the two
+situations apart on its own:
+
+```sh
+./scripts/install.sh
+```
+
+Options and environment variables:
+
+| Option / variable | Effect |
+|---|---|
+| `--from-source` / `--download` | Force building from the checkout / downloading a release |
+| `--version <vX.Y.Z>` / `JUSTFEED_VERSION` | The release to download (default: the latest) |
+| `--prefix <dir>` / `JUSTFEED_INSTALL_DIR` | Install the binary elsewhere (default `~/.local/bin`) |
+| `--no-modify-path` / `JUSTFEED_NO_MODIFY_PATH=1` | Do not touch your shell profile, even when the install directory is not on `PATH` |
+| `JUSTFEED_BASE_URL` | A different release base URL (default: this project's GitHub releases) |
+| `--help` | Print the usage |
+
+When the install directory is not on your `PATH`, the installer appends the matching line to
+`~/.bashrc`, `~/.zshrc` or `~/.config/fish/config.fish` and says so (with `--no-modify-path` it only
+prints what to add). Uninstall by deleting `<prefix>/justfeed`.
+
+The release also carries the plain archive `justfeed-x86_64-unknown-linux-gnu.tar.xz` (the binary
+plus the README, the changelog and the licence) together with its `.sha256`. On another
+architecture or on macOS and Windows, build from a clone with a Rust toolchain:
+
+```sh
 cargo install --path . --locked
 ```
+
+### Cutting a release
+
+`.github/workflows/release.yml` runs on every `v*` tag: it runs the tests, builds the binary, packs
+the archive, writes its `.sha256` and publishes all of it as a GitHub release — with that version's
+section of [CHANGELOG.md](CHANGELOG.md) as the notes. `workflow_dispatch` runs the same build
+without a tag and leaves the archive as a workflow artifact, for a dry run.
+
+## Quick start
 
 Put your feeds into `~/.config/justfeed/config.toml` — a commented template is written on the first
 start — and run:
