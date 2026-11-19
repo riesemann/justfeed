@@ -1,6 +1,6 @@
-//! tuifeed — RSS feeds and their articles in a terminal UI.
+//! justfeed — RSS feeds and their articles in a terminal UI.
 //!
-//! The library holds the state, configuration and rendering; the `tuifeed`
+//! The library holds the state, configuration and rendering; the `justfeed`
 //! binary wires them to a real terminal.
 
 pub mod app;

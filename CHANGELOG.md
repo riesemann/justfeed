@@ -1,8 +1,17 @@
 # Changelog
 
-All notable changes to tuifeed are documented in this file. The format follows
+All notable changes to justfeed are documented in this file. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project uses
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [2.0.0] - 2026-11-19
+
+### Changed
+
+- Renamed from `tuifeed` to `justfeed`. The crate, the binary and the repository are `justfeed` now;
+  the configuration lives in `~/.config/justfeed/config.toml` and the event trace variable is
+  `JUSTFEED_EVENT_LOG`. The old configuration file is no longer read: move it over (the feeds
+  themselves are unchanged) or let the new template be written and fill it in again.
 
 ## [1.2.2] - 2026-11-07
 
@@ -114,6 +123,7 @@ the follow-up features, and the behaviour is covered by tests.
 - A wrong command line reports the problem on stderr and exits with code 2 — before the terminal is
   taken over, so the message stays readable.
 
+[2.0.0]: https://github.com/riesemann/justfeed/releases/tag/v2.0.0
 [1.2.2]: https://github.com/riesemann/tuifeed/releases/tag/v1.2.2
 [1.2.1]: https://github.com/riesemann/tuifeed/releases/tag/v1.2.1
 [1.2.0]: https://github.com/riesemann/tuifeed/releases/tag/v1.2.0

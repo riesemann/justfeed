@@ -1,4 +1,4 @@
-//! Configuration: reading and writing `~/.config/tuifeed/config.toml`.
+//! Configuration: reading and writing `~/.config/justfeed/config.toml`.
 
 use std::fmt;
 use std::path::{Path, PathBuf};
@@ -308,9 +308,9 @@ impl Default for Config {
 }
 
 impl Config {
-    /// The path of the configuration file (`~/.config/tuifeed/config.toml` on Linux).
+    /// The path of the configuration file (`~/.config/justfeed/config.toml` on Linux).
     pub fn path() -> Option<PathBuf> {
-        ProjectDirs::from("", "", "tuifeed").map(|dirs| dirs.config_dir().join("config.toml"))
+        ProjectDirs::from("", "", "justfeed").map(|dirs| dirs.config_dir().join("config.toml"))
     }
 
     /// A plain-text overview of the configured feeds (for `--list`).
@@ -343,7 +343,7 @@ impl Config {
             }
             out.push('\n');
         }
-        out.push_str("\nShow one of them directly:  tuifeed --feed <NR|NAME>\n");
+        out.push_str("\nShow one of them directly:  justfeed --feed <NR|NAME>\n");
         out
     }
 
@@ -355,7 +355,7 @@ impl Config {
             Some(path) if path.exists() => match Self::load_from(&path) {
                 Ok(config) => config,
                 Err(error) => {
-                    eprintln!("tuifeed: {error:#}; using defaults");
+                    eprintln!("justfeed: {error:#}; using defaults");
                     Config::default()
                 }
             },
@@ -410,7 +410,7 @@ impl Config {
         }
         std::fs::write(&path, TEMPLATE)?;
         eprintln!(
-            "tuifeed: wrote a default configuration to {}",
+            "justfeed: wrote a default configuration to {}",
             path.display()
         );
         Ok(())
@@ -425,7 +425,7 @@ impl Config {
 }
 
 /// The commented file written on the first start.
-const TEMPLATE: &str = r#"# tuifeed configuration
+const TEMPLATE: &str = r#"# justfeed configuration
 #
 # theme:  gruvbox | nord | dracula | catppuccin
 # mode:   light | dark
@@ -459,7 +459,7 @@ mod tests {
     use super::*;
 
     fn scratch(tag: &str) -> PathBuf {
-        let dir = std::env::temp_dir().join(format!("tuifeed-test-{}-{tag}", std::process::id()));
+        let dir = std::env::temp_dir().join(format!("justfeed-test-{}-{tag}", std::process::id()));
         let _ = std::fs::remove_dir_all(&dir);
         dir
     }

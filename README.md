@@ -1,12 +1,13 @@
-# tuifeed
+# justfeed
 
 RSS feeds and their articles in a terminal interface (TUI), written in Rust.
 Runs on Linux, macOS and Windows.
 
-**Version 1.2.2** — see [CHANGELOG.md](CHANGELOG.md) for what each release contains.
+**Version 2.0.0** — see [CHANGELOG.md](CHANGELOG.md) for what each release contains.
+Renamed from `tuifeed` in 2.0.0 — the configuration moved to `~/.config/justfeed/`.
 Built with AI assistance — see [How this was built](#how-this-was-built).
 
-![tuifeed: the configured feeds on the left, the articles of the opened feed on the right](assets/screenshot.png)
+![justfeed: the configured feeds on the left, the articles of the opened feed on the right](assets/screenshot.png)
 
 ## Quick start
 
@@ -16,14 +17,14 @@ Install from a clone of this repository:
 cargo install --path . --locked
 ```
 
-Put your feeds into `~/.config/tuifeed/config.toml` — a commented template is written on the first
+Put your feeds into `~/.config/justfeed/config.toml` — a commented template is written on the first
 start — and run:
 
 ```
-tuifeed
+justfeed
 ```
 
-`tuifeed --help` lists the options, `tuifeed --list` the feeds you have configured.
+`justfeed --help` lists the options, `justfeed --list` the feeds you have configured.
 
 ## Controls
 
@@ -53,7 +54,7 @@ as does a browser that cannot be started. The same line carries a failed feed.
 
 ## Configuration
 
-`~/.config/tuifeed/config.toml` (or the system's usual configuration directory). A commented
+`~/.config/justfeed/config.toml` (or the system's usual configuration directory). A commented
 template is written on the first start; the example below shows every setting.
 
 ```toml
@@ -125,32 +126,32 @@ interval_minutes = 30
 ## Command line
 
 ```
-tuifeed                     # two columns: feed list on the left, articles on the right
-tuifeed -f Heise            # this feed only: no list, articles across the whole window
-tuifeed --feed 2            # the same via the number from --list
-tuifeed -l                  # list the configured feeds and exit
-tuifeed -V                  # print the version
-tuifeed --help              # usage and options
+justfeed                     # two columns: feed list on the left, articles on the right
+justfeed -f Heise            # this feed only: no list, articles across the whole window
+justfeed --feed 2            # the same via the number from --list
+justfeed -l                  # list the configured feeds and exit
+justfeed -V                  # print the version
+justfeed --help              # usage and options
 ```
 
-With `--feed <NR|NAME>` (`-f`) tuifeed starts with **one** feed: the feed list is gone, the article
+With `--feed <NR|NAME>` (`-f`) justfeed starts with **one** feed: the feed list is gone, the article
 column uses the whole window and always holds the focus. `Tab`/`←`/`→` do nothing then, while
 `↑`/`↓`, `/`, `r` and `Enter` work as usual. The feed is given either as the number from `--list` or
 as the `name` from the configuration (case-insensitive); a feed without a `name` can only be
-addressed by its number. If nothing matches, tuifeed names the available feeds (exit code 2) without
+addressed by its number. If nothing matches, justfeed names the available feeds (exit code 2) without
 taking over the terminal.
 
 `--list` (`-l`) shows which feeds are configured — number, name and the respective `max`:
 
 ```
-Configuration: /home/…/.config/tuifeed/config.toml
+Configuration: /home/…/.config/justfeed/config.toml
 
 2 feeds:
 
    1. Heise   (max 50)
    2. 9to5Linux
 
-Show one of them directly:  tuifeed --feed <NR|NAME>
+Show one of them directly:  justfeed --feed <NR|NAME>
 ```
 
 It starts no interface and fetches nothing from the network.
@@ -204,7 +205,7 @@ a delay, quits with `q` and prints everything the program drew — so a run can 
 screen:
 
 ```
-python3 scripts/pty_run.py <XDG_CONFIG_HOME> ./target/debug/tuifeed 12 $'\x1b[B\r'
+python3 scripts/pty_run.py <XDG_CONFIG_HOME> ./target/debug/justfeed 12 $'\x1b[B\r'
 ```
 
 Note: `Enter` in a pty is a CR (`\r`), not an LF (`\n`) — with `\n`, for example, an open search
@@ -212,18 +213,18 @@ stays open and the final `q` types into the search instead of quitting.
 
 ### Diagnosing input
 
-To see what your terminal actually sends for a key or a click, set `TUIFEED_EVENT_LOG` and read the
+To see what your terminal actually sends for a key or a click, set `JUSTFEED_EVENT_LOG` and read the
 file afterwards:
 
 ```
-TUIFEED_EVENT_LOG=/tmp/tuifeed-events.log cargo run
+JUSTFEED_EVENT_LOG=/tmp/justfeed-events.log cargo run
 ```
 
 Every `Event::Key` / `Event::Mouse` is appended with the state before and after it is handled.
 
 ## How this was built
 
-tuifeed is developed with AI assistance: the code, the tests and this documentation are written in
+justfeed is developed with AI assistance: the code, the tests and this documentation are written in
 pairing sessions with an AI coding agent (Hermes Agent by Nous Research) and reviewed by the
 maintainer. Nothing ships on the agent's word alone — every change passes `cargo fmt`,
 `cargo build`, `cargo test` and `cargo clippy --all-targets`, the feed parsers are tested against

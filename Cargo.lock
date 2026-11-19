@@ -1091,6 +1091,23 @@ dependencies = [
 ]
 
 [[package]]
+name = "justfeed"
+version = "2.0.0"
+dependencies = [
+ "anyhow",
+ "chrono",
+ "crossterm",
+ "directories",
+ "feed-rs",
+ "open",
+ "ratatui",
+ "reqwest",
+ "serde",
+ "tokio",
+ "toml",
+]
+
+[[package]]
 name = "kasuari"
 version = "0.4.13"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2637,23 +2654,6 @@ name = "try-lock"
 version = "0.2.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e421abadd41a4225275504ea4d6566923418b7f05506fbc9c0fe86ba7396114b"
-
-[[package]]
-name = "tuifeed"
-version = "1.2.2"
-dependencies = [
- "anyhow",
- "chrono",
- "crossterm",
- "directories",
- "feed-rs",
- "open",
- "ratatui",
- "reqwest",
- "serde",
- "tokio",
- "toml",
-]
 
 [[package]]
 name = "typenum"

@@ -8,13 +8,13 @@
 //! Both go through the public library API and a `TestBackend`, so a wrong scroll rule or a
 //! cap that is only applied in the model but not on screen is caught without a terminal.
 
-use ratatui::{Terminal, backend::TestBackend};
-use tuifeed::{
+use justfeed::{
     app::{App, FeedUpdate},
     config::{ColorMode, Config, Source},
     feed::{self, Feed},
     ui,
 };
+use ratatui::{Terminal, backend::TestBackend};
 
 const HEISE: &[u8] = include_bytes!("../fixtures/heise_atom.xml");
 const BBC: &[u8] = include_bytes!("../fixtures/bbc_rss.xml");

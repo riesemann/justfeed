@@ -1,6 +1,6 @@
 //! Command-line options.
 //!
-//! tuifeed takes exactly two things on the command line: a request for the usage text and the
+//! justfeed takes exactly two things on the command line: a request for the usage text and the
 //! name of a single feed to pin (`--feed`). Everything else lives in the configuration file.
 
 /// What the user asked for on the command line.
@@ -18,10 +18,10 @@ pub struct Options {
 
 /// The usage text.
 pub const USAGE: &str = "\
-tuifeed — RSS feeds and their articles in a terminal
+justfeed — RSS feeds and their articles in a terminal
 
 Usage:
-  tuifeed [OPTIONS]
+  justfeed [OPTIONS]
 
 Options:
   -f, --feed <NR|NAME>   show this feed only (number from --list, or its name),
@@ -31,8 +31,8 @@ Options:
   -h, --help             this help
 ";
 
-/// The version line, e.g. `tuifeed 1.0.0`.
-pub const VERSION: &str = concat!("tuifeed ", env!("CARGO_PKG_VERSION"));
+/// The version line, e.g. `justfeed 1.0.0`.
+pub const VERSION: &str = concat!("justfeed ", env!("CARGO_PKG_VERSION"));
 
 /// Parse the arguments after the program name.
 ///
@@ -98,7 +98,7 @@ mod tests {
         assert!(parse_args(&["-V"]).unwrap().version);
         assert!(parse_args(&["--version"]).unwrap().version);
         assert!(!parse_args(&[]).unwrap().version);
-        assert_eq!(VERSION, format!("tuifeed {}", env!("CARGO_PKG_VERSION")));
+        assert_eq!(VERSION, format!("justfeed {}", env!("CARGO_PKG_VERSION")));
     }
 
     #[test]

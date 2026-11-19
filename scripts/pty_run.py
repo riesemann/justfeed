@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run tuifeed in a pty of a known size and print what it draws.
+"""Run justfeed in a pty of a known size and print what it draws.
 
 `script` leaves the pty at 0x0, so ratatui draws nothing. This harness sets a
 window size with TIOCSWINSZ, sends a key sequence after a delay, then quits with

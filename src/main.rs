@@ -1,4 +1,4 @@
-//! tuifeed — RSS feeds and their articles in a terminal UI.
+//! justfeed — RSS feeds and their articles in a terminal UI.
 
 use std::io::{self, Stdout};
 use std::sync::mpsc::{self, Receiver, Sender};
@@ -10,14 +10,14 @@ use crossterm::{
     execute,
     terminal::{EnterAlternateScreen, LeaveAlternateScreen, disable_raw_mode, enable_raw_mode},
 };
-use ratatui::{Terminal, backend::CrosstermBackend};
-use tokio::runtime::Runtime;
-use tuifeed::{
+use justfeed::{
     app::{App, FeedUpdate},
     cli,
     config::Config,
     feed, ui,
 };
+use ratatui::{Terminal, backend::CrosstermBackend};
+use tokio::runtime::Runtime;
 
 type Tui = Terminal<CrosstermBackend<Stdout>>;
 
@@ -31,7 +31,7 @@ fn main() -> Result<()> {
     let options = match cli::parse(std::env::args().skip(1)) {
         Ok(options) => options,
         Err(error) => {
-            eprintln!("tuifeed: {error}");
+            eprintln!("justfeed: {error}");
             eprint!("\n{}", cli::USAGE);
             std::process::exit(EXIT_USAGE);
         }
@@ -51,14 +51,14 @@ fn main() -> Result<()> {
     }
 
     if let Err(error) = Config::write_default_if_missing() {
-        eprintln!("tuifeed: {error:#}");
+        eprintln!("justfeed: {error:#}");
     }
     // Resolve `--feed` before the terminal is switched over, so the message stays readable.
     let mut app = App::new(Config::load());
     if let Some(name) = &options.feed
         && let Err(error) = app.restrict_to_feed(name)
     {
-        eprintln!("tuifeed: {error}");
+        eprintln!("justfeed: {error}");
         std::process::exit(EXIT_USAGE);
     }
 
@@ -94,16 +94,16 @@ fn restore_terminal() -> Result<()> {
 fn run(terminal: &mut Tui, mut app: App) -> Result<()> {
     let runtime = Runtime::new().context("could not start the async runtime")?;
     let client = reqwest::Client::builder()
-        .user_agent(concat!("tuifeed/", env!("CARGO_PKG_VERSION")))
+        .user_agent(concat!("justfeed/", env!("CARGO_PKG_VERSION")))
         .build()
         .context("could not build the HTTP client")?;
     let (tx, rx) = mpsc::channel();
 
     start_load(&runtime, &client, &mut app, &tx);
 
-    // Optional trace of every terminal event, enabled by `TUIFEED_EVENT_LOG=<path>`
+    // Optional trace of every terminal event, enabled by `JUSTFEED_EVENT_LOG=<path>`
     // (diagnostics for "a key/click does nothing in my terminal").
-    let trace = std::env::var("TUIFEED_EVENT_LOG").ok();
+    let trace = std::env::var("JUSTFEED_EVENT_LOG").ok();
 
     while !app.should_quit {
         terminal.draw(|frame| ui::draw(frame, &app))?;
@@ -163,7 +163,7 @@ fn run(terminal: &mut Tui, mut app: App) -> Result<()> {
     Ok(())
 }
 
-/// Append one line to the event trace, if `TUIFEED_EVENT_LOG` points at a file.
+/// Append one line to the event trace, if `JUSTFEED_EVENT_LOG` points at a file.
 fn trace_event(path: Option<&str>, message: &str) {
     use std::io::Write;
     let Some(path) = path else {
