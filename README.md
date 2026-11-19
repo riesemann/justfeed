@@ -11,9 +11,9 @@ Built with AI assistance — see [How this was built](#how-this-was-built).
 
 ## Installing
 
-Every release carries a prebuilt Linux archive (x86_64, glibc 2.35 or newer — built on Ubuntu 22.04)
-and this installer, which fetches it, checks it against the sha256 it carries and puts `justfeed`
-in `~/.local/bin`:
+Every release carries a prebuilt Linux archive (x86_64, glibc 2.34 or newer — the floor read off the
+binary, which is built on Ubuntu 22.04) and this installer, which fetches the archive, checks it
+against the sha256 it carries and puts `justfeed` in `~/.local/bin`:
 
 ```sh
 curl --proto '=https' --tlsv1.2 -LsSf \
