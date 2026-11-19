@@ -4,6 +4,16 @@ All notable changes to justfeed are documented in this file. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project uses
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+- A documentation area: [`docs/`](docs/README.md) holds the manual, one page per topic —
+  [installing](docs/installing.md), [configuration](docs/configuration.md),
+  [using it](docs/usage.md) and [troubleshooting](docs/troubleshooting.md) for users, and
+  [development](docs/development.md) for contributors. The README stays the front door and now links
+  the manual instead of carrying all of it.
+
 ## [2.1.0] - 2026-11-19
 
 ### Added
@@ -138,6 +148,7 @@ the follow-up features, and the behaviour is covered by tests.
 - A wrong command line reports the problem on stderr and exits with code 2 — before the terminal is
   taken over, so the message stays readable.
 
+[Unreleased]: https://github.com/riesemann/justfeed/compare/v2.1.0...HEAD
 [2.1.0]: https://github.com/riesemann/justfeed/releases/tag/v2.1.0
 [2.0.0]: https://github.com/riesemann/justfeed/releases/tag/v2.0.0
 [1.2.2]: https://github.com/riesemann/tuifeed/releases/tag/v1.2.2
