@@ -4,6 +4,21 @@ All notable changes to justfeed are documented in this file. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project uses
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.0] - 2026-11-19
+
+### Added
+
+- A one-line install on Linux (x86_64 is the only target so far). Every `v*` tag is built by GitHub
+  Actions into a prebuilt archive (glibc 2.34 or newer) together with its `.sha256`, and the release
+  carries an installer that fetches the archive, verifies the checksum and puts the binary in
+  `~/.local/bin`:
+  `curl --proto '=https' --tlsv1.2 -LsSf https://github.com/riesemann/justfeed/releases/latest/download/justfeed-installer.sh | sh`
+- The same script, run from a checkout, builds from the source tree instead; it tells the two cases
+  apart by itself. `--version` picks a release, `--prefix` and `--no-modify-path` (or
+  `JUSTFEED_INSTALL_DIR` and `JUSTFEED_NO_MODIFY_PATH`) steer the install directory and whether the
+  shell profile is touched. When the directory is not on `PATH`, the matching line is added to
+  `~/.bashrc`, `~/.zshrc` or `~/.config/fish/config.fish`.
+
 ## [2.0.0] - 2026-11-19
 
 ### Changed
@@ -123,6 +138,7 @@ the follow-up features, and the behaviour is covered by tests.
 - A wrong command line reports the problem on stderr and exits with code 2 — before the terminal is
   taken over, so the message stays readable.
 
+[2.1.0]: https://github.com/riesemann/justfeed/releases/tag/v2.1.0
 [2.0.0]: https://github.com/riesemann/justfeed/releases/tag/v2.0.0
 [1.2.2]: https://github.com/riesemann/tuifeed/releases/tag/v1.2.2
 [1.2.1]: https://github.com/riesemann/tuifeed/releases/tag/v1.2.1

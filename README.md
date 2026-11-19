@@ -3,7 +3,7 @@
 RSS feeds and their articles in a terminal interface (TUI), written in Rust.
 Runs on Linux, macOS and Windows.
 
-**Version 2.0.0** — see [CHANGELOG.md](CHANGELOG.md) for what each release contains.
+**Version 2.1.0** — see [CHANGELOG.md](CHANGELOG.md) for what each release contains.
 Renamed from `tuifeed` in 2.0.0 — the configuration moved to `~/.config/justfeed/`.
 Built with AI assistance — see [How this was built](#how-this-was-built).
 
